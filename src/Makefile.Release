@@ -1,0 +1,22 @@
+# Spelling's Release Makefile
+#
+# Licensed under MIT (https://github.com/iamcottonball/spelling/blob/master/LICENSE)
+
+CFLAGS=
+LDFLAGS=
+
+all: $(EXEC)
+
+%.o: %.c
+	$(CC) -c $^ -o $@ $(CFLAGS)
+
+$(EXEC): $(OBJ)
+	$(CC) -o bin/$@ $^ $(LDFLAGS)
+
+.PHONY: clean mrproper
+
+clean:
+	@rm -f src/*.o
+
+mrproper: clean
+	@rm -f bin/$(EXEC)
