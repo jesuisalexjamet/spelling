@@ -1,16 +1,24 @@
 #ifndef __ARGUMENTS_H__
 #define __ARGUMENTS_H__
 
+/**
+ * \struct Argument
+ * \brief
+ */
 struct Argument {
-    char* name;
-    char* value;
-    char required:1;
+    char* name;                 /*<! The name of the argument. */
+    char* value;                /*<! The value of the argument, if given. */
+    char required:1;            /*<! Is the argument required ? */
 };
 typedef struct Argument Argument;
 
+/**
+ * \struct CommandLineOptions
+ * \brief
+ */
 struct CommandLineOptions {
-    Argument* args;
-    unsigned char argsCount;
+    Argument* args;             /*<! An table of arguments. */
+    unsigned char argsCount;    /*<! The size of the args table. */
 };
 typedef struct CommandLineOptions CommandLineOptions;
 
