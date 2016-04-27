@@ -3,7 +3,7 @@
 
 /**
  * \struct Argument
- * \brief
+ * \brief Represent an argument.
  */
 struct Argument {
     char* name;                 /*<! The name of the argument. */
@@ -14,7 +14,7 @@ typedef struct Argument Argument;
 
 /**
  * \struct CommandLineOptions
- * \brief
+ * \brief Represent a set of Arguments as fixed-length list.
  */
 struct CommandLineOptions {
     Argument* args;             /*<! An table of arguments. */
