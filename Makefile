@@ -4,7 +4,7 @@
 
 export CC=gcc
 export EXEC=spelling
-export SRC= src/main.c
+export SRC= src/main.c src/arguments.c
 export OBJ= $(SRC:.c=.o)
 
 debug:
