@@ -29,6 +29,17 @@ void initArgumentParser(CommandLineOptions* opts) {
 }
 
 void destroyArgumentParser(CommandLineOptions* opts) {
+    // Releasing the memory allocated to handle the values.
+    int i;
+
+    for (i = 0; i < opts->argsCount; i++) {
+        if (opts->args[i].value == NULL) {
+            continue;
+        }
+
+        free(opts->args[i].value);
+    }
+
     // Releasing memory allocated for the arguments.
     free(opts->args);
 }

@@ -1,2 +1,5 @@
+# Ignoring binaries
+/bin
 
+# Ignoring object files
 *.o
