@@ -6,11 +6,12 @@
  * \brief Represent an argument.
  */
 struct Argument {
-    char* name;                 /*<! The name of the argument. */
-    char* value;                /*<! The value of the argument, if given. */
-    char required:1;            /*<! Is the argument required ? */
+    const char* name;                 /*<! The name of the argument. */
+    const char* value;                /*<! The value of the argument, if given. */
 };
 typedef struct Argument Argument;
+
+void initArgument(Argument* arg, const char* name, const char* value);
 
 /**
  * \struct CommandLineOptions

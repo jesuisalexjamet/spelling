@@ -4,6 +4,11 @@
 #
 #include "arguments.h"
 
+void initArgument(Argument* arg, const char* name, const char* value) {
+    arg->name = name;
+    arg->value = value;
+}
+
 /**
  * \fn void initArgumentParser(CommandLineOptions* opts)
  * \brief Initialize an argument parser.
@@ -22,16 +27,12 @@ void initArgumentParser(CommandLineOptions* opts) {
     // Setting the file input argument.
     currentArgument = &(opts->args[0]);
 
-    currentArgument->name = "f";
-    currentArgument->value = NULL;
-    currentArgument->required = 1;
+    initArgument(currentArgument, "f", NULL);
 
     // Setting the file output argument.
     currentArgument = &(opts->args[1]);
 
-    currentArgument->name = "o";
-    currentArgument->value = NULL;
-    currentArgument->required = 1;
+    initArgument(currentArgument, "o", NULL);
 }
 
 /**
