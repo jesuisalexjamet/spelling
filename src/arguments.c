@@ -4,12 +4,25 @@
 #
 #include "arguments.h"
 
+/**
+ * \fn void initArgument(Argument* arg, const char* name, const char* value)
+ * \brief Initialize an argument.
+ *
+ * \param arg The argument to initialize.
+ * \param name The name of the argument.
+ * \param value The value of the argument.
+ */
 void initArgument(Argument* arg, const char* name, const char* value) {
     arg->name = name;
     arg->value = value;
 }
 
 /**
+ * \fn void destroyArgument(Argument* arg)
+ * \brief Destroy an argument.
+ *
+ * \param arg The argument to destroy.
+ */
 void destroyArgument(Argument* arg) {
     if (arg->value == NULL) {
         return;
