@@ -10,6 +10,15 @@ void initArgument(Argument* arg, const char* name, const char* value) {
 }
 
 /**
+void destroyArgument(Argument* arg) {
+    if (arg->value == NULL) {
+        return;
+    }
+
+    free(arg->value);
+}
+
+/**
  * \fn void initArgumentParser(CommandLineOptions* opts)
  * \brief Initialize an argument parser.
  *
