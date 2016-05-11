@@ -66,3 +66,45 @@ void destroySentence(Sentence* sentence) {
 
     free(sentence->words);
 }
+
+/**
+ * \fn void initDict(Dict* dict, const char* filePath)
+ * \brief Initialize a dictionnary.
+ *
+ * \param dict The dictionnary to initialize.
+ * \param filePath The path to the dictionnary file.
+ */
+void initDict(Dict* dict, const char* filePath) {
+
+}
+
+/**
+ * \fn void destroyDict(Dict* dict)
+ * \brief Destroy a dictionnary.
+ *
+ * \param sentence The dictionnary to destroy.
+ */
+void destroyDict(Dict* dict) {
+    if (dict->subdicts == NULL && dict->words == NULL) {
+        return;
+    }
+
+    int i;
+    Dict* currentDict;
+    Word* currentWord;
+
+    for (i = 0; i < 26; i++) {
+        currentDict = &(dict->subdicts[i]);
+
+        destroyDict(currentDict);
+    }
+
+    for (i = 0; i < dict->wordsCount; i++) {
+        currentWord = &(dict->words[i]);
+
+        destroyWord(currentWord);
+    }
+
+    free(dict->subdicts);
+    free(dict->words);
+}

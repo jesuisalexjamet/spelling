@@ -26,4 +26,14 @@ typedef struct Sentence Sentence;
 void initSentence(Sentence* sentence, Word* words, unsigned char wordsCount);
 void destroySentence(Sentence* sentence);
 
+struct Dict {
+    struct Dict* subdicts;                 /*!< 26 sub ditionnary */
+    Word* words;                   /*!< Words contained at this stage. */
+    unsigned int wordsCount;
+};
+typedef struct Dict Dict;
+
+void initDict(Dict* dict, const char* filePath);
+void destroyDict(Dict* dict);
+
 #endif // __UTILS_H__
