@@ -85,13 +85,12 @@ void initDict(Dict* dict, const char* filePath) {
  * \param sentence The dictionnary to destroy.
  */
 void destroyDict(Dict* dict) {
-    if (dict->subdicts == NULL && dict->words == NULL) {
+    if (dict->subdicts == NULL) {
         return;
     }
 
     int i;
     Dict* currentDict;
-    Word* currentWord;
 
     for (i = 0; i < 26; i++) {
         currentDict = &(dict->subdicts[i]);
@@ -99,12 +98,5 @@ void destroyDict(Dict* dict) {
         destroyDict(currentDict);
     }
 
-    for (i = 0; i < dict->wordsCount; i++) {
-        currentWord = &(dict->words[i]);
-
-        destroyWord(currentWord);
-    }
-
     free(dict->subdicts);
-    free(dict->words);
 }

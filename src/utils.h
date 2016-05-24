@@ -27,8 +27,8 @@ void initSentence(Sentence* sentence, Word* words, unsigned char wordsCount);
 void destroySentence(Sentence* sentence);
 
 struct Dict {
-    struct Dict* subdicts;                 /*!< 26 sub ditionnary */
-    Word* words;                   /*!< Words contained at this stage. */
+    struct Dict* subdicts;                  /*!< 34 sub ditionnary */
+    int exists:1;                           /*!< Does the current word exist ? */
     unsigned int wordsCount;
 };
 typedef struct Dict Dict;
