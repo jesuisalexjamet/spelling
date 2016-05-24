@@ -29,7 +29,7 @@ void destroySentence(Sentence* sentence);
 struct Dict {
     struct Dict* subdicts;                  /*!< 34 sub ditionnary */
     int exists:1;                           /*!< Does the current word exist ? */
-    unsigned int wordsCount;
+    int initialized:1;
 };
 typedef struct Dict Dict;
 
