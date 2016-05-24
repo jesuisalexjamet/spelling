@@ -33,7 +33,9 @@ struct Dict {
 };
 typedef struct Dict Dict;
 
-void initDict(Dict* dict, const char* filePath);
+void initRoot(Dict* dict, const char* filePath);
+void initDict(Dict* dict);
+void updateDict(Dict* dict, const char* word); 
 void destroyDict(Dict* dict);
 
 #endif // __UTILS_H__
