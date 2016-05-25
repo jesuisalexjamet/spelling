@@ -94,6 +94,7 @@ void initRoot(Dict* dict, const char* filePath){
 			i++;
 		}while (c !='\n' && i < 11);
 		word[i-1] = '\0';
+		normalizedWord(word);
 		updateDict(dict,word);
 	}while (c != EOF);
 
@@ -112,6 +113,7 @@ void initDict(Dict* dict) {
 void updateDict(Dict* dict, const char* word){
 	if (word[0] != '\0'){
 		int idl = idFromLetter(word[0]);
+		if (idl == -1){return;}
 		if (dict -> subdicts[idl].initialized == 0){
 			initDict(&(dict -> subdicts[idl]));
 		}
@@ -122,6 +124,22 @@ void updateDict(Dict* dict, const char* word){
 	}
 	else{
 		dict ->	exists = 1;
+	}
+}
+int exists(Dict* dict,const char* word){
+	if (word[0] != '\0'){
+		int idl = idFromLetter(word[0]);
+		if (dict -> subdicts[idl].initialized == 0){
+			return 0;
+		}
+		char* word2 = malloc(sizeof(char)*strlen(word));
+		strcpy(word2,word+1);
+		int res = exists(&(dict -> subdicts[idl]),word2);
+		free(word2);
+		return res;
+	}
+	else{
+		return dict -> exists;
 	}
 }
 /**
@@ -147,6 +165,14 @@ void destroyDict(Dict* dict) {
     free(dict->subdicts);
 }
 
+void normalizedWord(char* word){
+	int i = 0, len = strlen(word);
+
+	for ( ; i < len; i++) {
+		word[i] = tolower(word[i]);	
+	}
+}
+
 int idFromLetter(char l){
 	static char letters[27] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','-'};
 	int i = 0;
@@ -155,4 +181,5 @@ int idFromLetter(char l){
 			return i;
 		}
 	}
+	return -1;
 }

@@ -28,14 +28,17 @@ void destroySentence(Sentence* sentence);
 
 struct Dict {
     struct Dict* subdicts;                  /*!< 34 sub ditionnary */
-    int exists:1;                           /*!< Does the current word exist ? */
+    unsigned int exists:1;                           /*!< Does the current word exist ? */
     int initialized:1;
 };
 typedef struct Dict Dict;
 
 void initRoot(Dict* dict, const char* filePath);
 void initDict(Dict* dict);
-void updateDict(Dict* dict, const char* word); 
+void updateDict(Dict* dict, const char* word);
+int exists(Dict* dict,const char* word);
 void destroyDict(Dict* dict);
+void normalizedWord(char* word);
+int idFromLetter(char l);
 
 #endif // __UTILS_H__
