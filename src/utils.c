@@ -74,10 +74,56 @@ void destroySentence(Sentence* sentence) {
  * \param dict The dictionnary to initialize.
  * \param filePath The path to the dictionnary file.
  */
-void initDict(Dict* dict, const char* filePath) {
+void initRoot(Dict* dict, const char* filePath){
+	initDict(dict);
+	printf("filePath %s\n",filePath);
+	FILE* file = fopen(filePath,"r");
+	if(!file) {
+		perror("File opening failed");
+		return;
+	}
+	char c;
+	char* word = malloc(sizeof(char) * 10);
+	int i;
+	do{
+		memset(word,0,10);
+		i = 0;
+		do{	
+			c = fgetc(file);
+			word[i] = c;
+			i++;
+		}while (c !='\n' && i < 11);
+		word[i-1] = '\0';
+		updateDict(dict,word);
+	}while (c != EOF);
 
+	free(word);
+	fclose(file);
 }
-
+void initDict(Dict* dict) {
+	dict -> exists = 0;
+	dict -> subdicts = malloc(27*sizeof(Dict));
+	int i = 0;
+	for (;i<27;i++){
+		dict -> subdicts[i].initialized = 0;	
+	}
+	dict -> initialized = 1;
+}
+void updateDict(Dict* dict, const char* word){
+	if (word[0] != '\0'){
+		int idl = idFromLetter(word[0]);
+		if (dict -> subdicts[idl].initialized == 0){
+			initDict(&(dict -> subdicts[idl]));
+		}
+		char* word2 = malloc(sizeof(char)*strlen(word));
+		strcpy(word2,word+1);
+		updateDict(&(dict -> subdicts[idl]),word2);
+		free(word2);
+	}
+	else{
+		dict ->	exists = 1;
+	}
+}
 /**
  * \fn void destroyDict(Dict* dict)
  * \brief Destroy a dictionnary.
@@ -92,11 +138,21 @@ void destroyDict(Dict* dict) {
     int i;
     Dict* currentDict;
 
-    for (i = 0; i < 26; i++) {
+    for (i = 0; i < 27; i++) {
         currentDict = &(dict->subdicts[i]);
 
         destroyDict(currentDict);
     }
 
     free(dict->subdicts);
+}
+
+int idFromLetter(char l){
+	static char letters[27] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','-'};
+	int i = 0;
+	for (;i<27;i++){
+		if (letters[i] == l){
+			return i;
+		}
+	}
 }
