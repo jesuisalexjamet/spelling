@@ -24,10 +24,11 @@ void initArgument(Argument* arg, const char* name, const char* value) {
  * \param arg The argument to destroy.
  */
 void destroyArgument(Argument* arg) {
-    if (arg->value == NULL) {
+    if (arg == NULL || (arg->name == NULL && arg->value == NULL)) {
         return;
     }
 
+    free(arg->name);
     free(arg->value);
 }
 
@@ -64,6 +65,10 @@ void initArgumentParser(CommandLineOptions* opts) {
  * \param opts The argument parser to destroy.
  */
 void destroyArgumentParser(CommandLineOptions* opts) {
+    if (opts == NULL || opts->args == NULL) {
+        return; 
+    }
+
     // Releasing the memory allocated to handle the values.
     int i;
     Argument* currentArgument;
