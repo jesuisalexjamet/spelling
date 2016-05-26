@@ -4,6 +4,7 @@
 #include <ctype.h>
 #
 #include "checker.h"
+#include "utils.h"
 
 char* readContentFromFile(const char* filePath) {
     FILE* inputFile = fopen(filePath, "r");
