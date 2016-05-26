@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #
 #include "utils.h"
 
@@ -88,7 +89,7 @@ void initRoot(Dict* dict, const char* filePath){
 	do{
 		memset(word,0,10);
 		i = 0;
-		do{	
+		do{
 			c = fgetc(file);
 			word[i] = c;
 			i++;
@@ -106,7 +107,7 @@ void initDict(Dict* dict) {
 	dict -> subdicts = malloc(27*sizeof(Dict));
 	int i = 0;
 	for (;i<27;i++){
-		dict -> subdicts[i].initialized = 0;	
+		dict -> subdicts[i].initialized = 0;
 	}
 	dict -> initialized = 1;
 }
@@ -169,7 +170,7 @@ void normalizedWord(char* word){
 	int i = 0, len = strlen(word);
 
 	for ( ; i < len; i++) {
-		word[i] = tolower(word[i]);	
+		word[i] = tolower(word[i]);
 	}
 }
 
