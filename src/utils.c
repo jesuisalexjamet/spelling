@@ -77,7 +77,6 @@ void destroySentence(Sentence* sentence) {
  */
 void initRoot(Dict* dict, const char* filePath){
 	initDict(dict);
-	printf("filePath %s\n",filePath);
 	FILE* file = fopen(filePath,"r");
 	if(!file) {
 		perror("File opening failed");
