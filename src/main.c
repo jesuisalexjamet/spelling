@@ -6,7 +6,7 @@
 #include "utils.h"
 int main(int argc, char *argv[]) {
 	Dict root;
-	initRoot(&root,"bin/test2.txt");
+	initRoot(&root,"bin/dictionnary.txt");
 	printf("à %i \n",exists(&root,"à"));
 
 	char* word = malloc(sizeof(char) * 10);
