@@ -1,20 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#
 #include "arguments.h"
 #include "utils.h"
+#include "checker.h"
+
 int main(int argc, char *argv[]) {
 	Dict root;
-	initRoot(&root,"bin/test2.txt");
-	printf("à %i \n",exists(&root,"à"));
-
-	char* word = malloc(sizeof(char) * 10);
-	memset(word, 0x0, 10);
-	strcpy(word, "Clàire");
-	normalizedWord(word);
-
-	printf("Normalisé: %s\n", word);
-
-	printf("claire %i \n",exists(&root,word));
+	initRoot(&root,"bin/dictionary.txt");
+	char* input = readContentFromFile("bin/input.txt");
+	Content output;
+	setContent(input, &output);
+	spellCheck(&output,&root);
+	char* sentence = rebuild(&output);
+	writeContent(sentence, "bin/output.txt");
+	free(input);
+	free(sentence);
 }

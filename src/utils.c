@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #
 #include "utils.h"
 
@@ -76,23 +77,22 @@ void destroySentence(Sentence* sentence) {
  */
 void initRoot(Dict* dict, const char* filePath){
 	initDict(dict);
-	printf("filePath %s\n",filePath);
 	FILE* file = fopen(filePath,"r");
 	if(!file) {
 		perror("File opening failed");
 		return;
 	}
 	char c;
-	char* word = malloc(sizeof(char) * 10);
+	char* word = malloc(sizeof(char) * 32);
 	int i;
 	do{
-		memset(word,0,10);
+		memset(word,0,32);
 		i = 0;
-		do{	
+		do{
 			c = fgetc(file);
 			word[i] = c;
 			i++;
-		}while (c !='\n' && i < 11);
+		}while (c !='\n' && i < 20);
 		word[i-1] = '\0';
 		normalizedWord(word);
 		updateDict(dict,word);
@@ -106,7 +106,7 @@ void initDict(Dict* dict) {
 	dict -> subdicts = malloc(27*sizeof(Dict));
 	int i = 0;
 	for (;i<27;i++){
-		dict -> subdicts[i].initialized = 0;	
+		dict -> subdicts[i].initialized = 0;
 	}
 	dict -> initialized = 1;
 }
@@ -169,7 +169,7 @@ void normalizedWord(char* word){
 	int i = 0, len = strlen(word);
 
 	for ( ; i < len; i++) {
-		word[i] = tolower(word[i]);	
+		word[i] = tolower(word[i]);
 	}
 }
 
